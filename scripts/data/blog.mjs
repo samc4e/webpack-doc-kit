@@ -11,18 +11,6 @@ const OUTPUT = join(ROOT, 'generated', 'blog.json');
 
 const titleFromBody = body => body.match(/^#\s+(.+)$/m)?.[1].trim() ?? null;
 
-const parseDate = (value, file) => {
-  const date = value ? new Date(value) : null;
-
-  if (!date || Number.isNaN(date.getTime())) {
-    throw new Error(
-      `Invalid or missing blog date in pages/blog/posts/${file}: ${JSON.stringify(value ?? '<missing>')}`
-    );
-  }
-
-  return date.toISOString();
-};
-
 const readPosts = async () => {
   const entries = await readdir(POSTS_DIR);
   const files = entries.filter(name => name.endsWith('.md'));
@@ -34,11 +22,16 @@ const readPosts = async () => {
         await readFile(join(POSTS_DIR, file), 'utf8')
       );
 
+      const date = new Date(data.date);
+      if (Number.isNaN(date.getTime())) {
+        throw new Error(`Invalid or missing date in ${file}: ${data.date}`);
+      }
+
       return {
         slug,
         title: titleFromBody(content) ?? slug,
         authors: data.authors?.split(',').map(s => s.trim()),
-        date: parseDate(data.date, file),
+        date: date.toISOString(),
         category: data.category ?? null,
         image: data.image ?? null,
         ...(data.description && { description: data.description }),
