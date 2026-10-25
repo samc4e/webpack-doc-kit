@@ -22,9 +22,10 @@ const readPosts = async () => {
         await readFile(join(POSTS_DIR, file), 'utf8')
       );
 
-      const date = new Date(data.date);
-      if (Number.isNaN(date.getTime())) {
-        throw new Error(`Invalid or missing date in ${file}: ${data.date}`);
+      // Only unquoted YAML dates are accepted; other values become wrong dates
+      const { date } = data;
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+        throw new Error(`Invalid or missing date in ${file}: ${date}`);
       }
 
       return {
