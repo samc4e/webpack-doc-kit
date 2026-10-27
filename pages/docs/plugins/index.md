@@ -20,8 +20,8 @@ The plugins below are separate packages maintained by the webpack organization.
 
 ## Deprecated plugins
 
-webpack or the plugins above now cover what these plugins did, so their
-repositories are archived and they are no longer documented here.
+webpack or the plugins above now cover what these plugins did, so these
+packages are deprecated and no longer documented here.
 
 | Plugin                                                                                        | Use instead                                                                   |
 | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |

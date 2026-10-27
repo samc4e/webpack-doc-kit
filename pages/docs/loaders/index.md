@@ -24,8 +24,8 @@ The loaders below are maintained by the webpack organization.
 
 ## Deprecated loaders
 
-webpack now covers what these loaders did, so their repositories are archived
-and they are no longer documented here.
+These loaders are deprecated and their repositories are archived, so they are
+no longer documented here. Each one lists what to use instead.
 
 | Loader                                                        | Use instead                                                                                                      |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
